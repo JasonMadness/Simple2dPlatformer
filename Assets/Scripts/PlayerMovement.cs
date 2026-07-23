@@ -3,6 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    private const string HorizontalAxisName = "Horizontal";
+    private const string JumpButtonName = "Jump";
+
     [SerializeField] private float _moveSpeed = 7f;
     [SerializeField] private float _jumpForce = 15f;
     [SerializeField] private float _groundCheckRadius = 0.3f;
@@ -16,19 +19,13 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-
-        if (_groundCheckPoint == null)
-        {
-            var child = transform.Find("GroundCheck");
-            _groundCheckPoint = child != null ? child : transform;
-        }
     }
 
     private void Update()
     {
-        _horizontalInput = Input.GetAxis("Horizontal");
+        _horizontalInput = Input.GetAxis(HorizontalAxisName);
 
-        if (Input.GetButtonDown("Jump") && _isGrounded)
+        if (Input.GetButtonDown(JumpButtonName) && _isGrounded)
         {
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _jumpForce);
         }
@@ -48,8 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Transform checkTransform = _groundCheckPoint != null ? _groundCheckPoint : transform;
         Gizmos.color = _isGrounded ? Color.green : Color.red;
-        Gizmos.DrawWireSphere(checkTransform.position, _groundCheckRadius);
+        Gizmos.DrawWireSphere(_groundCheckPoint != null ? _groundCheckPoint.position : transform.position, _groundCheckRadius);
     }
 }
