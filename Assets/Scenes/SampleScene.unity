@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 1429196892}
   - component: {fileID: 1429196891}
   - component: {fileID: 1429196890}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -575,8 +575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85fb58b62a084684299b198391624620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 7
-  _jumpForce: 15
+  _moveSpeed: 3
+  _jumpForce: 7
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
