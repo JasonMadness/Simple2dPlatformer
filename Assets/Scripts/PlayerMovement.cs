@@ -1,10 +1,12 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
     private const string HorizontalAxisName = "Horizontal";
     private const string JumpButtonName = "Jump";
+    private const string SpeedParameterName = "Speed";
 
     [SerializeField] private float _moveSpeed = 7f;
     [SerializeField] private float _jumpForce = 15f;
@@ -13,17 +15,27 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform _groundCheckPoint;
 
     private Rigidbody2D _rigidbody2D;
+    private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
+
     private float _horizontalInput;
     private bool _isGrounded;
 
-    private void Start()
+    private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
         _horizontalInput = Input.GetAxis(HorizontalAxisName);
+
+        float speed = Mathf.Abs(_horizontalInput);
+        _animator.SetFloat(SpeedParameterName, speed);
+
+        FlipSprite();
 
         if (Input.GetButtonDown(JumpButtonName) && _isGrounded)
         {
@@ -43,9 +55,15 @@ public class PlayerMovement : MonoBehaviour
         _isGrounded = Physics2D.OverlapCircle(_groundCheckPoint.position, _groundCheckRadius, _groundLayer);
     }
 
-    private void OnDrawGizmosSelected()
+    private void FlipSprite()
     {
-        Gizmos.color = _isGrounded ? Color.green : Color.red;
-        Gizmos.DrawWireSphere(_groundCheckPoint != null ? _groundCheckPoint.position : transform.position, _groundCheckRadius);
+        if (_horizontalInput > 0)
+        {
+            _spriteRenderer.flipX = false;
+        }
+        else if (_horizontalInput < 0)
+        {
+            _spriteRenderer.flipX = true;
+        }
     }
 }
