@@ -5,6 +5,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 7f;
     [SerializeField] private float _jumpForce = 15f;
+    [SerializeField] private float _groundCheckRadius = 0.3f;
+    [SerializeField] private LayerMask _groundLayer;
 
     private Rigidbody2D _rigidbody2D;
     private float _horizontalInput;
@@ -22,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && _isGrounded)
         {
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _jumpForce);
-            _isGrounded = false;
         }
     }
 
@@ -35,8 +36,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGround()
     {
-        float groundCheckRadius = 0.3f;
-        LayerMask groundLayer = LayerMask.GetMask("Default", "Ground");
-        _isGrounded = Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
+        _isGrounded = Physics2D.OverlapCircle(transform.position, _groundCheckRadius, _groundLayer);
     }
 }
