@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce = 15f;
     [SerializeField] private float _groundCheckRadius = 0.3f;
     [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private Transform _groundCheckPoint;
 
     private Rigidbody2D _rigidbody2D;
     private float _horizontalInput;
@@ -15,6 +16,12 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+
+        if (_groundCheckPoint == null)
+        {
+            var child = transform.Find("GroundCheck");
+            _groundCheckPoint = child != null ? child : transform;
+        }
     }
 
     private void Update()
@@ -36,6 +43,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGround()
     {
-        _isGrounded = Physics2D.OverlapCircle(transform.position, _groundCheckRadius, _groundLayer);
+        _isGrounded = Physics2D.OverlapCircle(_groundCheckPoint.position, _groundCheckRadius, _groundLayer);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Transform checkTransform = _groundCheckPoint != null ? _groundCheckPoint : transform;
+        Gizmos.color = _isGrounded ? Color.green : Color.red;
+        Gizmos.DrawWireSphere(checkTransform.position, _groundCheckRadius);
     }
 }
