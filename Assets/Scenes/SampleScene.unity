@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32b083d85c7da5468f4fe0f4731fd88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinPrefab: {fileID: 0}
+  _coinPrefab: {fileID: 5677833958062106833, guid: 3dfc8fd383c196a4081c633c3ce0bb6c, type: 3}
   _spawnPoints:
   - {fileID: 211794313}
   - {fileID: 450944259}
