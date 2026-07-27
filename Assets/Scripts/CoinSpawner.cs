@@ -7,7 +7,6 @@ public class CoinSpawner : MonoBehaviour
 
     private GameObject _coin;
     private bool[] _isPointOccupied;
-    private int _occupiedPointIndex;
 
     private void Start()
     {
@@ -33,7 +32,6 @@ public class CoinSpawner : MonoBehaviour
         int randomIndex = Random.Range(0, _spawnPoints.Length);
         _coin = Instantiate(_coinPrefab, _spawnPoints[randomIndex].position, Quaternion.identity);
         _isPointOccupied[randomIndex] = true;
-        _occupiedPointIndex = randomIndex;
     }
 
     private void MoveCoinToNextPosition()
