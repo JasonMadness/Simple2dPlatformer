@@ -10,7 +10,6 @@ public class CoinCollector : MonoBehaviour
         if (other.gameObject.TryGetComponent(typeof(Coin), out _))
         {
             Collected?.Invoke();
-            Debug.Log("Coin collected!");
         }
     }
 }
