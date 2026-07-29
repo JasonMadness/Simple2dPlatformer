@@ -7,7 +7,7 @@ public class CoinCollector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.TryGetComponent(typeof(Coin), out _))
+        if (other.gameObject.TryGetComponent<Coin>(out _))
             Collected?.Invoke();
     }
 }
