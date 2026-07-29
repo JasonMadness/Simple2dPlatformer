@@ -15,7 +15,7 @@ public class CoinSpawner : MonoBehaviour
         SpawnInitialCoin();
     }
 
-    public void NotifyCoinCollected()
+    public void OnCoinCollected()
     {
         _coin.SetActive(false);
         MoveCoinToNextPosition();

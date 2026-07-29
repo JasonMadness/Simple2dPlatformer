@@ -1,19 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class CoinCollector : MonoBehaviour
 {
+    public static event Action Collected;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Coin")
+        if (other.CompareTag("Coin"))
         {
-            CoinSpawner coinSpawner = FindObjectOfType<CoinSpawner>();
-
-            if (coinSpawner != null)
-            {
-                coinSpawner.NotifyCoinCollected();
-            }
+            Collected?.Invoke();
         }
     }
 }
