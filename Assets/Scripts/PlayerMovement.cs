@@ -38,9 +38,7 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite();
 
         if (Input.GetButtonDown(JumpButtonName) && _isGrounded)
-        {
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _jumpForce);
-        }
     }
 
     private void FixedUpdate()
@@ -58,12 +56,8 @@ public class PlayerMovement : MonoBehaviour
     private void FlipSprite()
     {
         if (_horizontalInput > 0)
-        {
             _spriteRenderer.flipX = false;
-        }
         else if (_horizontalInput < 0)
-        {
             _spriteRenderer.flipX = true;
-        }
     }
 }

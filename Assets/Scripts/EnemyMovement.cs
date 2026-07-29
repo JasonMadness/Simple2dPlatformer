@@ -33,9 +33,7 @@ public class EnemyMovement : MonoBehaviour
         float currentX = transform.position.x;
 
         if (currentX <= _minX || currentX >= _maxX)
-        {
             ChangeDirection();
-        }
     }
 
     private void ChangeDirection()
