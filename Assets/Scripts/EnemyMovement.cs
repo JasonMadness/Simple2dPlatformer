@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float _xBoundary = 4f;
 
-    // Update is called once per frame
-    void Update()
+    private void Move()
     {
-        
+        float xPosition = Mathf.PingPong(Time.time, _xBoundary) - _xBoundary;
+        transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
     }
 }
