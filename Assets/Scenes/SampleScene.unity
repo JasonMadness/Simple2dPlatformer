@@ -979,6 +979,7 @@ GameObject:
   - component: {fileID: 1190336433}
   - component: {fileID: 1190336432}
   - component: {fileID: 1190336434}
+  - component: {fileID: 1190336435}
   m_Layer: 0
   m_Name: Enemy Slime
   m_TagString: Untagged
@@ -1067,6 +1068,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _xBoundary: 4
   _speed: 2
+--- !u!114 &1190336435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190336431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656bff67a2fe95447ac91f994d0fa758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
 --- !u!1 &1229892869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,6 +1362,7 @@ GameObject:
   - component: {fileID: 1547849589}
   - component: {fileID: 1547849590}
   - component: {fileID: 1547849591}
+  - component: {fileID: 1547849592}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1547,6 +1562,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be3cc928d75ae340b6c4de9f1c80bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1547849592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547849584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656bff67a2fe95447ac91f994d0fa758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
 --- !u!1 &1746915032
 GameObject:
   m_ObjectHideFlags: 0
