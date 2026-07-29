@@ -44,6 +44,8 @@ public class CoinSpawner : MonoBehaviour
         }
         while (_isPointOccupied[freePointIndex]);
 
+        ClearAllSpawnPoints();
+        _isPointOccupied[freePointIndex] = true;
         _coin.transform.position = _spawnPoints[freePointIndex].position;
         _coin.SetActive(true);
     }
