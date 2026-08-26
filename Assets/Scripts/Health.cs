@@ -7,14 +7,17 @@ public class Health : MonoBehaviour
 
     private int _currentHealth;
 
-    private void Start()
+    public event Action DamageTaken;
+
+    private void Awake()
     {
         _currentHealth = _maxHealth;
     }
 
     public void TakeDamage(int damage)
     {
-        _currentHealth = Mathf.Max(0, _currentHealth - damage);
+        _currentHealth -= damage;
+        DamageTaken?.Invoke();
 
         if (_currentHealth <= 0)
             Die();
