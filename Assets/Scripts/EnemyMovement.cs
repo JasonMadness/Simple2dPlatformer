@@ -1,13 +1,12 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(PlayerDetector))]
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _xBoundary = 4f;
     [SerializeField] private float _speed = 2f;
     [SerializeField] private float _chaseSpeed = 3f;
-    [SerializeField] private float _detectionRange = 3f;
-    [SerializeField] private float _sameLevelTolerance = 0.5f;
 
     private float _direction = 1f;
     private Vector2 _startPosition;
@@ -15,15 +14,12 @@ public class EnemyMovement : MonoBehaviour
     private float _minX;
     private float _maxX;
     private SpriteRenderer _spriteRenderer;
-    private Transform _player;
+    private PlayerDetector _playerDetector;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-            _player = playerObject.transform;
+        _playerDetector = GetComponent<PlayerDetector>();
     }
 
     private void Start()
@@ -35,21 +31,10 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        if (IsPlayerInChaseRange())
+        if (_playerDetector.IsPlayerDetected())
             ChasePlayer();
         else
             Patrol();
-    }
-
-    private bool IsPlayerInChaseRange()
-    {
-        if (_player == null)
-            return false;
-
-        float horizontalDistance = Mathf.Abs(_player.position.x - transform.position.x);
-        float verticalDistance = Mathf.Abs(_player.position.y - transform.position.y);
-
-        return horizontalDistance <= _detectionRange && verticalDistance <= _sameLevelTolerance;
     }
 
     private void Patrol()
@@ -68,7 +53,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void ChasePlayer()
     {
-        float directionToPlayer = Mathf.Sign(_player.position.x - transform.position.x);
+        Transform player = _playerDetector.Player;
+        float directionToPlayer = Mathf.Sign(player.position.x - transform.position.x);
         _direction = directionToPlayer;
 
         Move(_direction, _chaseSpeed);
@@ -87,4 +73,3 @@ public class EnemyMovement : MonoBehaviour
         _direction *= -1f;
     }
 }
-
