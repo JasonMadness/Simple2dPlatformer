@@ -982,6 +982,8 @@ GameObject:
   - component: {fileID: 1190336435}
   - component: {fileID: 1190336436}
   - component: {fileID: 1190336437}
+  - component: {fileID: 1190336439}
+  - component: {fileID: 1190336438}
   m_Layer: 0
   m_Name: Enemy Slime
   m_TagString: Untagged
@@ -1143,6 +1145,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 25, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &1190336438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190336431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655994e3bcad92c47b8caff1f99736a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flashColor: {r: 1, g: 0, b: 0, a: 1}
+  _flashDuration: 0.5
+--- !u!114 &1190336439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190336431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82195836ab1c7b4a9083d4525268135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
+  _contactRange: 0.8
+  _damageCooldown: 1
 --- !u!1 &1229892869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,6 +1457,8 @@ GameObject:
   - component: {fileID: 1547849591}
   - component: {fileID: 1547849592}
   - component: {fileID: 1547849593}
+  - component: {fileID: 1547849595}
+  - component: {fileID: 1547849594}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1650,6 +1683,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37840e2da77463b4cb12469424a8f405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1547849594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547849584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655994e3bcad92c47b8caff1f99736a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flashColor: {r: 1, g: 0, b: 0, a: 1}
+  _flashDuration: 0.5
+--- !u!114 &1547849595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547849584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82195836ab1c7b4a9083d4525268135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 10
+  _contactRange: 0.8
+  _damageCooldown: 1
 --- !u!1 &1746915032
 GameObject:
   m_ObjectHideFlags: 0
