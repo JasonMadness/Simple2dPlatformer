@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PlayerDetector))]
+[RequireComponent(typeof(CharacterRotation))]
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _xBoundary = 4f;
@@ -10,16 +10,16 @@ public class EnemyMovement : MonoBehaviour
 
     private float _direction = 1f;
     private Vector2 _startPosition;
-
     private float _minX;
     private float _maxX;
-    private SpriteRenderer _spriteRenderer;
+
     private PlayerDetector _playerDetector;
+    private CharacterRotation _characterRotation;
 
     private void Awake()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _playerDetector = GetComponent<PlayerDetector>();
+        _characterRotation = GetComponent<CharacterRotation>();
     }
 
     private void Start()
@@ -45,8 +45,16 @@ public class EnemyMovement : MonoBehaviour
 
         if (currentX <= _minX || currentX >= _maxX)
         {
-            float clampedX = Mathf.Clamp(currentX, _minX, _maxX);
-            transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
+            float clampedX = Mathf.Clamp(
+                currentX,
+                _minX,
+                _maxX);
+
+            transform.position = new Vector3(
+                clampedX,
+                transform.position.y,
+                transform.position.z);
+
             ChangeDirection();
         }
     }
@@ -54,7 +62,9 @@ public class EnemyMovement : MonoBehaviour
     private void ChasePlayer()
     {
         Transform player = _playerDetector.Player;
-        float directionToPlayer = Mathf.Sign(player.position.x - transform.position.x);
+        float directionToPlayer = Mathf.Sign(
+            player.position.x - transform.position.x);
+
         _direction = directionToPlayer;
 
         Move(_direction, _chaseSpeed);
@@ -63,9 +73,10 @@ public class EnemyMovement : MonoBehaviour
     private void Move(float direction, float speed)
     {
         float moveX = direction * speed * Time.deltaTime;
+
         transform.Translate(moveX, 0f, 0f);
 
-        _spriteRenderer.flipX = direction > 0f;
+        _characterRotation.Face(direction);
     }
 
     private void ChangeDirection()
