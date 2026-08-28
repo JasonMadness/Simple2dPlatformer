@@ -9,7 +9,6 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float _chaseSpeed = 3f;
 
     private float _direction = 1f;
-    private Vector2 _startPosition;
     private float _minX;
     private float _maxX;
 
@@ -24,9 +23,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        _startPosition = transform.position;
-        _minX = _startPosition.x - _xBoundary;
-        _maxX = _startPosition.x + _xBoundary;
+        _minX = -_xBoundary;
+        _maxX = +_xBoundary;
     }
 
     private void Update()
@@ -39,43 +37,26 @@ public class EnemyMovement : MonoBehaviour
 
     private void Patrol()
     {
-        Move(_direction, _speed);
-
         float currentX = transform.position.x;
 
-        if (currentX <= _minX || currentX >= _maxX)
-        {
-            float clampedX = Mathf.Clamp(
-                currentX,
-                _minX,
-                _maxX);
-
-            transform.position = new Vector3(
-                clampedX,
-                transform.position.y,
-                transform.position.z);
-
+        if (currentX <= _minX && _direction < 0f)
             ChangeDirection();
-        }
+        else if (currentX >= _maxX && _direction > 0f)
+            ChangeDirection();
+
+        Move(_direction, _speed);
     }
 
     private void ChasePlayer()
     {
-        Transform player = _playerDetector.Player;
-        float directionToPlayer = Mathf.Sign(
-            player.position.x - transform.position.x);
-
-        _direction = directionToPlayer;
-
+        _direction = _playerDetector.Player.position.x - transform.position.x;
         Move(_direction, _chaseSpeed);
     }
 
     private void Move(float direction, float speed)
     {
-        float moveX = direction * speed * Time.deltaTime;
-
-        transform.Translate(moveX, 0f, 0f);
-
+        float directionX = direction * speed * Time.deltaTime;
+        transform.Translate(directionX, 0f, 0f);
         _characterRotation.Face(direction);
     }
 
