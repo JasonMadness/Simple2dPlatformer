@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class CoinSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _coinPrefab;
+    [SerializeField] private Coin _coinPrefab;
     [SerializeField] private Transform[] _spawnPoints = new Transform[4];
 
-    private GameObject _coin;
+    private Coin _coin;
     private bool[] _isPointOccupied;
 
     private void Start()
