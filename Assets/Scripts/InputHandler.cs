@@ -7,6 +7,7 @@ public class InputHandler : MonoBehaviour
     private const string JumpButton = "Jump";
 
     private float _horizontal;
+
     public float Horizontal => _horizontal;
     public event Action JumpPressed;
 
