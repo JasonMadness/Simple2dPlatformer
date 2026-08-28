@@ -23,8 +23,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        _minX = -_xBoundary;
-        _maxX = +_xBoundary;
+        _minX = - _xBoundary;
+        _maxX = + _xBoundary;
     }
 
     private void Update()
@@ -49,14 +49,31 @@ public class EnemyMovement : MonoBehaviour
 
     private void ChasePlayer()
     {
-        _direction = _playerDetector.Player.position.x - transform.position.x;
+        Transform player = _playerDetector.Player;
+
+        if (player == null)
+            return;
+
+        float directionToPlayer = Mathf.Sign(
+            player.position.x - transform.position.x);
+
+        if (Mathf.Approximately(directionToPlayer, 0f))
+            return;
+
+        _direction = directionToPlayer;
+
         Move(_direction, _chaseSpeed);
     }
 
     private void Move(float direction, float speed)
     {
-        float directionX = direction * speed * Time.deltaTime;
-        transform.Translate(directionX, 0f, 0f);
+        float moveX = direction * speed * Time.deltaTime;
+
+        transform.Translate(
+            moveX,
+            0f,
+            0f);
+
         _characterRotation.Face(direction);
     }
 
