@@ -2,10 +2,10 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(InputHandler))]
+[RequireComponent(typeof(CharacterRotation))]
 public class PlayerMovement : MonoBehaviour
 {
-    private const string HorizontalAxisName = "Horizontal";
-    private const string JumpButtonName = "Jump";
     private const string SpeedParameterName = "Speed";
 
     [SerializeField] private float _moveSpeed = 7f;
@@ -16,48 +16,72 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
-    private SpriteRenderer _spriteRenderer;
+    private InputHandler _inputHandler;
+    private CharacterRotation _characterRotation;
 
     private float _horizontalInput;
     private bool _isGrounded;
+    private bool _jumpRequested;
 
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _inputHandler = GetComponent<InputHandler>();
+        _characterRotation = GetComponent<CharacterRotation>();
+    }
+
+    private void OnEnable()
+    {
+        _inputHandler.JumpPressed += OnJumpPressed;
+    }
+
+    private void OnDisable()
+    {
+        _inputHandler.JumpPressed -= OnJumpPressed;
     }
 
     private void Update()
     {
-        _horizontalInput = Input.GetAxis(HorizontalAxisName);
+        _horizontalInput = _inputHandler.Horizontal;
 
         float speed = Mathf.Abs(_horizontalInput);
         _animator.SetFloat(SpeedParameterName, speed);
 
-        FlipSprite();
-
-        if (Input.GetButtonDown(JumpButtonName) && _isGrounded)
-            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _jumpForce);
+        if (!Mathf.Approximately(_horizontalInput, 0f))
+            _characterRotation.Face(_horizontalInput);
     }
 
     private void FixedUpdate()
     {
-        Vector2 movement = new Vector2(_horizontalInput * _moveSpeed, _rigidbody2D.velocity.y);
+        Vector2 movement = new Vector2(
+            _horizontalInput * _moveSpeed,
+            _rigidbody2D.velocity.y);
+
         _rigidbody2D.velocity = movement;
+
         CheckGround();
+
+        if (_jumpRequested && _isGrounded)
+        {
+            _rigidbody2D.velocity = new Vector2(
+                _rigidbody2D.velocity.x,
+                _jumpForce);
+        }
+
+        _jumpRequested = false;
+    }
+
+    private void OnJumpPressed()
+    {
+        _jumpRequested = true;
     }
 
     private void CheckGround()
     {
-        _isGrounded = Physics2D.OverlapCircle(_groundCheckPoint.position, _groundCheckRadius, _groundLayer);
-    }
-
-    private void FlipSprite()
-    {
-        if (_horizontalInput > 0)
-            _spriteRenderer.flipX = false;
-        else if (_horizontalInput < 0)
-            _spriteRenderer.flipX = true;
+        _isGrounded = Physics2D.OverlapCircle(
+            _groundCheckPoint.position,
+            _groundCheckRadius,
+            _groundLayer);
     }
 }
