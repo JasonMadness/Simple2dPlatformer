@@ -10,18 +10,13 @@ public class InputHandler : MonoBehaviour
 
     private float _horizontal;
 
-    public float Horizontal
-    {
-        get { return _horizontal; }
-    }
+    public float Horizontal => _horizontal;
 
     private void Update()
     {
         _horizontal = Input.GetAxis(HorizontalAxisName);
 
         if (Input.GetButtonDown(JumpButtonName))
-        {
             JumpPressed?.Invoke();
-        }
     }
 }
