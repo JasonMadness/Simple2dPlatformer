@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
-public class HealthCollector : MonoBehaviour
+public class FirstAidCollector : MonoBehaviour
 {
     private Health _health;
 
