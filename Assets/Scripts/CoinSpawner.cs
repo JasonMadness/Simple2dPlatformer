@@ -16,12 +16,7 @@ public class CoinSpawner : MonoBehaviour
     private void SpawnCoin()
     {
         int spawnPointIndex = GetRandomSpawnPointIndex();
-
-        _coin = Instantiate(
-            _coinPrefab,
-            _spawnPoints[spawnPointIndex].position,
-            Quaternion.identity);
-
+        _coin = Instantiate(_coinPrefab, _spawnPoints[spawnPointIndex].position, Quaternion.identity);
         _currentSpawnPointIndex = spawnPointIndex;
         _coin.Collected += OnCoinCollected;
     }
