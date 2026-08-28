@@ -49,18 +49,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void ChasePlayer()
     {
-        Transform player = _playerDetector.Player;
-
-        if (player == null)
-            return;
-
-        float directionToPlayer = Mathf.Sign(
-            player.position.x - transform.position.x);
-
-        if (Mathf.Approximately(directionToPlayer, 0f))
-            return;
-
-        _direction = directionToPlayer;
+        float deltaX = _playerDetector.Player.position.x - transform.position.x;
+        _direction = Mathf.Sign(deltaX);
 
         Move(_direction, _chaseSpeed);
     }
