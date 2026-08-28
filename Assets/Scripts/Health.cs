@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     private int _currentHealth;
 
     public event Action DamageTaken;
+    public event Action Died;
 
     private void Awake()
     {
@@ -30,6 +31,6 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        gameObject.SetActive(false);
+        Died?.Invoke();
     }
 }
