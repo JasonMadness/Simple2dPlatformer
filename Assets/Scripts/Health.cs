@@ -10,6 +10,9 @@ public class Health : MonoBehaviour
     public event Action DamageTaken;
     public event Action Died;
 
+    public int CurrentHealth => _currentHealth;
+    public int MaxHealth => _maxHealth;
+
     private void Awake()
     {
         _currentHealth = _maxHealth;
@@ -17,20 +20,21 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _currentHealth -= damage;
+        _currentHealth -= damage;  
         DamageTaken?.Invoke();
 
         if (_currentHealth <= 0)
-            Die();
+        {
+            _currentHealth = 0;
+            Died?.Invoke();
+        }
     }
 
     public void Heal(int amount)
     {
-        _currentHealth = Mathf.Min(_maxHealth, _currentHealth + amount);
-    }
+        _currentHealth += amount;
 
-    private void Die()
-    {
-        Died?.Invoke();
+        if (_currentHealth > _maxHealth)
+            _currentHealth = _maxHealth;
     }
 }
