@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
 public class HealthCollector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Health _health;
+
+    private void Awake()
     {
-        
+        _health = GetComponent<Health>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.TryGetComponent(out FirstAidKit firstAidKit))
+        {
+            _health.Heal(firstAidKit.HealAmount);
+            Destroy(firstAidKit.gameObject);
+        }
     }
 }
