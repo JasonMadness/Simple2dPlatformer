@@ -3,50 +3,56 @@ using UnityEngine;
 public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] private Coin _coinPrefab;
-    [SerializeField] private Transform[] _spawnPoints = new Transform[4];
+    [SerializeField] private Transform[] _spawnPoints;
 
     private Coin _coin;
-    private bool[] _isPointOccupied;
+    private int _currentSpawnPointIndex = -1;
 
     private void Start()
     {
-        _isPointOccupied = new bool[_spawnPoints.Length];
-        ClearAllSpawnPoints();
-        SpawnInitialCoin();
+        SpawnCoin();
     }
 
-    public void OnCoinCollected()
+    private void SpawnCoin()
     {
-        _coin.SetActive(false);
-        MoveCoinToNextPosition();
+        int spawnPointIndex = GetRandomSpawnPointIndex();
+
+        _coin = Instantiate(
+            _coinPrefab,
+            _spawnPoints[spawnPointIndex].position,
+            Quaternion.identity);
+
+        _currentSpawnPointIndex = spawnPointIndex;
+        _coin.Collected += OnCoinCollected;
     }
 
-    private void ClearAllSpawnPoints()
+    private void OnCoinCollected(Coin coin)
     {
-        for (int i = 0; i < _isPointOccupied.Length; i++)
-            _isPointOccupied[i] = false;
+        coin.gameObject.SetActive(false);
+
+        int spawnPointIndex = GetRandomSpawnPointIndex();
+
+        coin.transform.position = _spawnPoints[spawnPointIndex].position;
+        _currentSpawnPointIndex = spawnPointIndex;
+
+        coin.gameObject.SetActive(true);
     }
 
-    private void SpawnInitialCoin()
+    private int GetRandomSpawnPointIndex()
     {
-        int randomIndex = Random.Range(0, _spawnPoints.Length);
-        _coin = Instantiate(_coinPrefab, _spawnPoints[randomIndex].position, Quaternion.identity);
-        _isPointOccupied[randomIndex] = true;
-    }
-
-    private void MoveCoinToNextPosition()
-    {
-        int freePointIndex;
+        int index;
 
         do
         {
-            freePointIndex = Random.Range(0, _spawnPoints.Length);
+            index = Random.Range(0, _spawnPoints.Length);
         }
-        while (_isPointOccupied[freePointIndex]);
+        while (index == _currentSpawnPointIndex);
 
-        ClearAllSpawnPoints();
-        _isPointOccupied[freePointIndex] = true;
-        _coin.transform.position = _spawnPoints[freePointIndex].position;
-        _coin.SetActive(true);
+        return index;
+    }
+
+    private void OnDisable()
+    {
+        _coin.Collected -= OnCoinCollected;
     }
 }
