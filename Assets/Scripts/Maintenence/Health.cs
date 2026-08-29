@@ -30,7 +30,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void Heal(int amount)
+    public void Increase(int amount)
     {
         _current += amount;
 

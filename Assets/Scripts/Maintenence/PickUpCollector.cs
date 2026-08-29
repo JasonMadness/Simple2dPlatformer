@@ -21,7 +21,7 @@ public class PickUpCollector : MonoBehaviour
 
             if (pickUp is FirstAidKit)
             {
-                _health.Heal(pickUp.HealAmount);
+                _health.Increase(pickUp.HealAmount);
                 Destroy(pickUp.gameObject);
             }
         }
