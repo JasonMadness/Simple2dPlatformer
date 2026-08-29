@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FirstAidKit : MonoBehaviour
+public class FirstAidKit : PickUp
 {
     [SerializeField] private int _healAmount = 20;
 

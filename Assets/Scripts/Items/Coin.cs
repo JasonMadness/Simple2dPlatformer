@@ -1,12 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Coin : PickUp
 {
-    public event Action<Coin> Collected;
 
-    public void Collect()
-    {
-        Collected?.Invoke(this);
-    }
 }
