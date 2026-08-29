@@ -62,7 +62,8 @@ public class EnemyMovement : MonoBehaviour
         transform.Translate(
             moveX,
             0f,
-            0f);
+            0f,
+            Space.World);
 
         _characterRotation.Face(direction);
     }
