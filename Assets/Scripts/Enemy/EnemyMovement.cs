@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerDetector))]
-[RequireComponent(typeof(CharacterRotation))]
+[RequireComponent(typeof(CharacterRotator))]
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _xBoundary = 4f;
@@ -13,12 +13,12 @@ public class EnemyMovement : MonoBehaviour
     private float _maxX;
 
     private PlayerDetector _playerDetector;
-    private CharacterRotation _characterRotation;
+    private CharacterRotator _characterRotation;
 
     private void Awake()
     {
         _playerDetector = GetComponent<PlayerDetector>();
-        _characterRotation = GetComponent<CharacterRotation>();
+        _characterRotation = GetComponent<CharacterRotator>();
     }
 
     private void Start()

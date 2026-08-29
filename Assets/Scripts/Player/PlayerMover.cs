@@ -3,8 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(InputHandler))]
-[RequireComponent(typeof(CharacterRotation))]
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(CharacterRotator))]
+public class PlayerMover : MonoBehaviour
 {
     private const string SpeedParameterName = "Speed";
 
@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
     private InputHandler _inputHandler;
-    private CharacterRotation _characterRotation;
+    private CharacterRotator _characterRotation;
 
     private float _horizontalInput;
     private bool _isGrounded;
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _inputHandler = GetComponent<InputHandler>();
-        _characterRotation = GetComponent<CharacterRotation>();
+        _characterRotation = GetComponent<CharacterRotator>();
     }
 
     private void OnEnable()

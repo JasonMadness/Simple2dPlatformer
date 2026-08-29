@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CharacterRotation : MonoBehaviour
+public class CharacterRotator : MonoBehaviour
 {
     public void Face(float direction)
     {
