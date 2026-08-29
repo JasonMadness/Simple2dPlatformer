@@ -23,8 +23,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        _minX = - _xBoundary;
-        _maxX = + _xBoundary;
+        _minX = -_xBoundary;
+        _maxX = +_xBoundary;
     }
 
     private void Update()
@@ -58,13 +58,7 @@ public class EnemyMovement : MonoBehaviour
     private void Move(float direction, float speed)
     {
         float moveX = direction * speed * Time.deltaTime;
-
-        transform.Translate(
-            moveX,
-            0f,
-            0f,
-            Space.World);
-
+        transform.Translate(moveX, 0f, 0f, Space.World);
         _characterRotation.Face(direction);
     }
 
