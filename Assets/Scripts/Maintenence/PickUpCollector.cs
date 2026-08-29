@@ -24,5 +24,6 @@ public class PickUpCollector : MonoBehaviour
                 _health.Heal(pickUp.HealAmount);
                 Destroy(pickUp.gameObject);
             }
+        }
     }
 }
