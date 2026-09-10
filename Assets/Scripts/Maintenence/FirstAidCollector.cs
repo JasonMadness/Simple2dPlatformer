@@ -14,7 +14,7 @@ public class FirstAidCollector : MonoBehaviour
     {
         if (other.TryGetComponent(out FirstAidKit firstAidKit))
         {
-            _health.Heal(firstAidKit.HealAmount);
+            _health.Increase(firstAidKit.HealAmount);
             Destroy(firstAidKit.gameObject);
         }
     }
