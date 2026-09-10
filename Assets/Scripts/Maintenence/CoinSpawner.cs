@@ -21,7 +21,7 @@ public class CoinSpawner : MonoBehaviour
         _coin.Collected += OnCoinCollected;
     }
 
-    private void OnCoinCollected(Coin coin)
+    private void OnCoinCollected(PickUp coin)
     {
         coin.gameObject.SetActive(false);
 
