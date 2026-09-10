@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    public event Action<GameObject> Collected;
+    [SerializeField] private int _healAmount;
+
+    public int HealAmount => _healAmount;
+
+    public event Action<PickUp> Collected;
 
     public void Collect()
     {
