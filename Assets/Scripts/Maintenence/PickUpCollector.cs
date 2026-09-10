@@ -12,7 +12,7 @@ public class PickUpCollector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out PickUp pickUp)
+        if (other.TryGetComponent(out PickUp pickUp))
         {
             if (pickUp is Coin)
             {
