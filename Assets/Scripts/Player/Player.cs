@@ -12,15 +12,15 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.Died += OnDied;
+        _health.Ended += OnHealthEnded;
     }
 
     private void OnDisable()
     {
-        _health.Died -= OnDied;
+        _health.Ended -= OnHealthEnded;
     }
 
-    private void OnDied()
+    private void OnHealthEnded()
     {
         gameObject.SetActive(false);
     }

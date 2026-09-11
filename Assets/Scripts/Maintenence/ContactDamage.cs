@@ -34,7 +34,7 @@ public class ContactDamage : MonoBehaviour
 
             if (distance < _contactRange)
             {
-                otherHealth.TakeDamage(_damage);
+                otherHealth.Decrease(_damage);
                 _currentCooldown = _damageCooldown;
             }
         }
