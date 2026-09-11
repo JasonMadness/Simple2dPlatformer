@@ -1016,6 +1016,7 @@ GameObject:
   - component: {fileID: 1190336439}
   - component: {fileID: 1190336438}
   - component: {fileID: 1190336440}
+  - component: {fileID: 1190336441}
   m_Layer: 0
   m_Name: Enemy Slime
   m_TagString: Untagged
@@ -1117,7 +1118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656bff67a2fe95447ac91f994d0fa758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _max: 100
 --- !u!114 &1190336436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1216,6 +1217,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 264bf98a107d15a41b475d9f4eacb4db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1190336441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190336431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cac39819f6227e4aab2f7e156386438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1229892869
@@ -1506,6 +1519,7 @@ GameObject:
   - component: {fileID: 1547849597}
   - component: {fileID: 1547849596}
   - component: {fileID: 1547849598}
+  - component: {fileID: 1547849599}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1579,6 +1593,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1438440106}
+  - {fileID: 1706342908}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1547849587
@@ -1717,7 +1732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656bff67a2fe95447ac91f994d0fa758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _max: 100
 --- !u!114 &1547849593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1795,6 +1810,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa90753b6f9abff4f99775df2ec6d310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1547849599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547849584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cac39819f6227e4aab2f7e156386438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1706342907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1706342908}
+  m_Layer: 0
+  m_Name: HealthBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1706342908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706342907}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1547849586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1746915032
 GameObject:
   m_ObjectHideFlags: 0
