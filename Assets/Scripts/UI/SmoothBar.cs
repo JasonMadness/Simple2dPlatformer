@@ -13,8 +13,6 @@ public class SmoothBar : Bar
     {
         if (Mathf.Abs(_slider.value - _targetValue) > _epsilon)
             _slider.value = Mathf.MoveTowards(_slider.value, _targetValue, _speed * Time.deltaTime);
-
-        Debug.Log(_slider.value + " " + _targetValue);
     }
 
     protected override void UpdateView()
