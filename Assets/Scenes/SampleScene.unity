@@ -800,6 +800,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerHealth: {fileID: 1547849592}
   _playerHealthBar: {fileID: 1706342909}
+  _enemyHealth: {fileID: 1190336435}
+  _enemyHealthBar: {fileID: 996721985}
 --- !u!4 &533230472
 Transform:
   m_ObjectHideFlags: 0
