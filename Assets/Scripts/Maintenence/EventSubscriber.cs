@@ -5,7 +5,7 @@ public class EventSubscriber : MonoBehaviour
     [SerializeField] private Health _playerHealth;
     [SerializeField] private Bar _playerHealthBar;
 
-    private void Awake()
+    private void Start()
     {
         _playerHealthBar.Initialize(_playerHealth.Max, _playerHealth.Current);
     }
