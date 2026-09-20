@@ -708,8 +708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d37e957e86b90343be541981d59978f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealth: {fileID: 0}
-  _playerHealthBar: {fileID: 0}
+  _playerHealth: {fileID: 1547849592}
+  _playerHealthBar: {fileID: 1706342909}
 --- !u!4 &533230472
 Transform:
   m_ObjectHideFlags: 0
@@ -1124,7 +1124,6 @@ GameObject:
   - component: {fileID: 929314022}
   - component: {fileID: 929314021}
   - component: {fileID: 929314020}
-  - component: {fileID: 929314023}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1182,20 +1181,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &929314023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929314019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d37e957e86b90343be541981d59978f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerHealth: {fileID: 1547849592}
-  _playerHealthBar: {fileID: 1706342909}
 --- !u!1 &942720185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,9 +1463,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1190336431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264bf98a107d15a41b475d9f4eacb4db, type: 3}
+  m_Script: {fileID: 11500000, guid: 656bff67a2fe95447ac91f994d0fa758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _max: 100
 --- !u!114 &1190336441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1904,7 +1890,6 @@ GameObject:
   - component: {fileID: 1547849595}
   - component: {fileID: 1547849594}
   - component: {fileID: 1547849597}
-  - component: {fileID: 1547849596}
   - component: {fileID: 1547849598}
   - component: {fileID: 1547849599}
   m_Layer: 0
@@ -2161,18 +2146,6 @@ MonoBehaviour:
   _damage: 10
   _contactRange: 0.8
   _damageCooldown: 1
---- !u!114 &1547849596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547849584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264bf98a107d15a41b475d9f4eacb4db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1547849597
 MonoBehaviour:
   m_ObjectHideFlags: 0
