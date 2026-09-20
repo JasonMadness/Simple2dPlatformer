@@ -1,10 +1,17 @@
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class CharacterRotator : MonoBehaviour
 {
+    private SpriteRenderer _spriteRenderer;
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     public void Face(float direction)
     {
-        float yRotation = direction > 0f ? 0f : 180f;
-        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+        _spriteRenderer.flipX = direction < 0f;
     }
 }
