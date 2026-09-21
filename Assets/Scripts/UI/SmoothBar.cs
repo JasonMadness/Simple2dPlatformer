@@ -9,11 +9,19 @@ public class SmoothBar : Bar
 
     private float _epsilon = 0.0001f;
     private float _targetValue;
+    private Coroutine _smoothUpdateCoroutine;
 
     protected override void UpdateView()
     {
-        _targetValue = (float)CurrentValue / MaxValue;    
-        StartCoroutine(SmoothUpdate());
+        if (MaxValue <= 0)
+            return;
+
+        _targetValue = (float)CurrentValue / MaxValue;
+
+        if (_smoothUpdateCoroutine != null)
+            StopCoroutine(_smoothUpdateCoroutine);
+
+        _smoothUpdateCoroutine = StartCoroutine(SmoothUpdate());
     }
 
     private IEnumerator SmoothUpdate()
@@ -23,5 +31,7 @@ public class SmoothBar : Bar
             _slider.value = Mathf.MoveTowards(_slider.value, _targetValue, _speed * Time.deltaTime);
             yield return null;
         }
+
+        _smoothUpdateCoroutine = null;
     }
 }
