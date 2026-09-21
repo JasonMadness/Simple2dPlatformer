@@ -7,7 +7,7 @@ public class HealthPresenterFactory : MonoBehaviour
 
     private readonly List<HealthPresenter> _presenters = new();
 
-    private void OnEnable()
+    private void Start()
     {
         foreach (var pair in _pairs)
         {
@@ -15,13 +15,5 @@ public class HealthPresenterFactory : MonoBehaviour
             _presenters.Add(presenter);
             presenter.Enable();
         }
-    }
-
-    private void OnDisable()
-    {
-        foreach (var presenter in _presenters)
-            presenter.Disable();
-
-        _presenters.Clear();
     }
 }
