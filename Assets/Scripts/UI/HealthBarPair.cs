@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class HealthBarPair : MonoBehaviour
+[Serializable]
+public class HealthBarPair
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Health _health;
+    [SerializeField] private Bar _bar;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Health Health => _health;
+    public Bar Bar => _bar;
 }
