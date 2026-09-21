@@ -3,31 +3,21 @@ using UnityEngine;
 public class VampirismDamager : MonoBehaviour
 {
     [SerializeField] private float _radius = 4f;
-    [SerializeField] private float _damagePerSecond = 20f;
+    [SerializeField] private int _damage = 5;
     [SerializeField] private LayerMask _enemyLayer;
-
-    private float _accumulatedDamage;
 
     public float Radius => _radius;
 
-    public int Damage(float deltaTime)
+    public int Damage()
     {
         Health target = FindNearestTarget();
 
         if (target == null)
             return 0;
 
-        _accumulatedDamage += _damagePerSecond * deltaTime;
+        target.Decrease(_damage);
 
-        int damage = Mathf.FloorToInt(_accumulatedDamage);
-
-        if (damage <= 0)
-            return 0;
-
-        _accumulatedDamage -= damage;
-        target.Decrease(damage);
-
-        return damage;
+        return _damage;
     }
 
     private Health FindNearestTarget()
