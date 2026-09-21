@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,14 +10,18 @@ public class SmoothBar : Bar
     private float _epsilon = 0.0001f;
     private float _targetValue;
 
-    private void Update()
-    {
-        if (Mathf.Abs(_slider.value - _targetValue) > _epsilon)
-            _slider.value = Mathf.MoveTowards(_slider.value, _targetValue, _speed * Time.deltaTime);
-    }
-
     protected override void UpdateView()
     {
-        _targetValue = (float)CurrentValue / MaxValue;        
+        _targetValue = (float)CurrentValue / MaxValue;    
+        StartCoroutine(SmoothUpdate());
+    }
+
+    private IEnumerator SmoothUpdate()
+    {
+        while (Mathf.Abs(_slider.value - _targetValue) > _epsilon)
+        {
+            _slider.value = Mathf.MoveTowards(_slider.value, _targetValue, _speed * Time.deltaTime);
+            yield return null;
+        }
     }
 }
