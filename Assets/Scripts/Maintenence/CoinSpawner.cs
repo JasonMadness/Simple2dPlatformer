@@ -13,6 +13,11 @@ public class CoinSpawner : MonoBehaviour
         SpawnCoin();
     }
 
+    private void OnDisable()
+    {
+        _coin.Collected -= OnCoinCollected;
+    }
+
     private void SpawnCoin()
     {
         int spawnPointIndex = GetRandomSpawnPointIndex();
@@ -44,10 +49,5 @@ public class CoinSpawner : MonoBehaviour
         while (index == _currentSpawnPointIndex);
 
         return index;
-    }
-
-    private void OnDisable()
-    {
-        _coin.Collected -= OnCoinCollected;
     }
 }
