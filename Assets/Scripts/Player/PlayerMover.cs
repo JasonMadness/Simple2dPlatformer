@@ -60,7 +60,7 @@ public class PlayerMover : MonoBehaviour
 
         _rigidbody2D.velocity = movement;
 
-        CheckGround();
+        UpdateGroundedState();
 
         if (_jumpRequested && _isGrounded)
         {
@@ -77,7 +77,7 @@ public class PlayerMover : MonoBehaviour
         _jumpRequested = true;
     }
 
-    private void CheckGround()
+    private void UpdateGroundedState()
     {
         _isGrounded = Physics2D.OverlapCircle(
             _groundCheckPoint.position,
