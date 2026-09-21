@@ -1334,7 +1334,7 @@ GameObject:
   - component: {fileID: 996721984}
   - component: {fileID: 996721985}
   m_Layer: 0
-  m_Name: HealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1612,8 +1612,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49a8f6c167c3ec42805e9264c144986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detectionRange: 3
-  _sameLevelTolerance: 0.5
 --- !u!61 &1190336437
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2627,7 +2625,7 @@ GameObject:
   - component: {fileID: 1706342908}
   - component: {fileID: 1706342909}
   m_Layer: 0
-  m_Name: HealthBar
+  m_Name: PlayerHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
