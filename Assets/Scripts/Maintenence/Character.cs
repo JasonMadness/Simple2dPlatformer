@@ -3,15 +3,25 @@ using UnityEngine;
 RequireComponent(typeof(Health))]
 public class Character : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Health _health;
+
+    private void Awake()
     {
-        
+        _health = GetComponent<Health>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        _health.Ended += OnHealthEnded;
+    }
+
+    private void OnDisable()
+    {
+        _health.Ended -= OnHealthEnded;
+    }
+
+    private void OnHealthEnded()
+    {
+        gameObject.SetActive(false);
     }
 }
