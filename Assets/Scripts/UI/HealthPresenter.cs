@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class HealthPresenter
 {
     private readonly Health _health;
@@ -11,7 +13,7 @@ public class HealthPresenter
 
     public void Enable()
     {
-        _bar.Initialize(_health.Max, _health.Current);
+        _bar.Initialize(_health.Current, _health.Max);
         _health.ValueChanged += _bar.OnValueChanged;
     }
 
