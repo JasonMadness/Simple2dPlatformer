@@ -3,9 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerDetector : MonoBehaviour
 {
-    [SerializeField] private float _detectionRange = 3f;
-    [SerializeField] private float _sameLevelTolerance = 0.5f;
-
     private Transform _player;
     private bool _isPlayerDetected;
 
