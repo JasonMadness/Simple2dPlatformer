@@ -4,23 +4,21 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(InputHandler))]
 [RequireComponent(typeof(CharacterRotator))]
+[RequireComponent(typeof(GroundDetector))]
 public class PlayerMover : MonoBehaviour
 {
     private const string SpeedParameterName = "Speed";
 
     [SerializeField] private float _moveSpeed = 7f;
     [SerializeField] private float _jumpForce = 15f;
-    [SerializeField] private float _groundCheckRadius = 0.3f;
-    [SerializeField] private LayerMask _groundLayer;
-    [SerializeField] private Transform _groundCheckPoint;
 
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
     private InputHandler _inputHandler;
     private CharacterRotator _characterRotation;
+    private GroundDetector _groundDetector;
 
     private float _horizontalInput;
-    private bool _isGrounded;
     private bool _jumpRequested;
 
     private void Awake()
@@ -29,6 +27,7 @@ public class PlayerMover : MonoBehaviour
         _animator = GetComponent<Animator>();
         _inputHandler = GetComponent<InputHandler>();
         _characterRotation = GetComponent<CharacterRotator>();
+        _groundDetector = GetComponent<GroundDetector>();
     }
 
     private void OnEnable()
@@ -60,9 +59,7 @@ public class PlayerMover : MonoBehaviour
 
         _rigidbody2D.velocity = movement;
 
-        UpdateGroundedState();
-
-        if (_jumpRequested && _isGrounded)
+        if (_jumpRequested && _groundDetector.IsGrounded)
         {
             _rigidbody2D.velocity = new Vector2(
                 _rigidbody2D.velocity.x,
@@ -75,13 +72,5 @@ public class PlayerMover : MonoBehaviour
     private void OnJumpPressed()
     {
         _jumpRequested = true;
-    }
-
-    private void UpdateGroundedState()
-    {
-        _isGrounded = Physics2D.OverlapCircle(
-            _groundCheckPoint.position,
-            _groundCheckRadius,
-            _groundLayer);
     }
 }
