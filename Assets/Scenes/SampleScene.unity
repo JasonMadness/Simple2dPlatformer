@@ -3045,7 +3045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 4
-  _damagePerSecond: 20
+  _damage: 5
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -3063,6 +3063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 6
   _cooldown: 4
+  _damageInterval: 0.5
 --- !u!1 &1661993608
 GameObject:
   m_ObjectHideFlags: 0
