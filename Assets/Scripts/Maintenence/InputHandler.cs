@@ -6,10 +6,13 @@ public class InputHandler : MonoBehaviour
     private const string HorizontalAxis = "Horizontal";
     private const string JumpButton = "Jump";
 
+    [SerializeField] private KeyCode _vampirismKey = KeyCode.V;
+
     private float _horizontal;
 
     public float Horizontal => _horizontal;
     public event Action JumpPressed;
+    public event Action VampirismPressed;
 
     private void Update()
     {
@@ -17,5 +20,8 @@ public class InputHandler : MonoBehaviour
 
         if (Input.GetButtonDown(JumpButton))
             JumpPressed?.Invoke();
+
+        if (Input.GetKeyDown(_vampirismKey))
+            VampirismPressed?.Invoke();
     }
 }
