@@ -9,6 +9,7 @@ public class Vampirism : MonoBehaviour
 {
     [SerializeField] private float _duration = 6f;
     [SerializeField] private float _cooldown = 4f;
+    [SerializeField] private float _damageInterval = 0.5f;
 
     private Health _health;
     private InputHandler _inputHandler;
@@ -53,13 +54,21 @@ public class Vampirism : MonoBehaviour
         _view.Show();
 
         float remaining = _duration;
+        float elapsed = 0f;
 
         while (remaining > 0f)
         {
-            int damage = _damager.Damage(Time.deltaTime);
+            elapsed += Time.deltaTime;
 
-            if (damage > 0)
-                _health.Increase(damage);
+            if (elapsed >= _damageInterval)
+            {
+                elapsed -= _damageInterval;
+
+                int damage = _damager.Damage();
+
+                if (damage > 0)
+                    _health.Increase(damage);
+            }
 
             remaining -= Time.deltaTime;
             _view.SetCharge(remaining / _duration);
