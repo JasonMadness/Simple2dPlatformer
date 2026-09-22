@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
 
         if (_current <= 0)
         {
-            float remainingDamage = damage - _current;
+            float remainingDamage = damage + _current;
             _current = 0;
             Ended?.Invoke();
             return remainingDamage;
