@@ -19,22 +19,25 @@ public class Health : MonoBehaviour
         _current = _max;
     }
 
-    public void Decrease(float damage)
+    public float Decrease(float damage)
     {
         if (_current <= 0)
-            return;
+            return 0;
 
         _current -= damage;
 
         if (_current <= 0)
         {
+            float remainingDamage = -_current;
             _current = 0;
             Ended?.Invoke();
-            return;
+            return remainingDamage;
         }
 
         DamageTaken?.Invoke();
         ValueChanged?.Invoke(_current);
+
+        return damage;
     }
 
     public void Increase(float amount)
