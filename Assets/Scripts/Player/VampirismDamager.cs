@@ -3,7 +3,7 @@ using UnityEngine;
 public class VampirismDamager : MonoBehaviour
 {
     [SerializeField] private float _radius = 4f;
-    [SerializeField] private int _damage = 5;
+    [SerializeField] private float _damage = 5;
     [SerializeField] private LayerMask _enemyLayer;
 
     public float Radius => _radius;
