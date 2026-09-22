@@ -64,7 +64,7 @@ public class Vampirism : MonoBehaviour
             {
                 elapsed -= _damageInterval;
 
-                int damage = _damager.Damage();
+                float damage = _damager.Damage();
 
                 if (damage > 0)
                     _health.Increase(damage);

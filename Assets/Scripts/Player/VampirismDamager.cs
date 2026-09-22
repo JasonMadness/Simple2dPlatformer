@@ -8,16 +8,16 @@ public class VampirismDamager : MonoBehaviour
 
     public float Radius => _radius;
 
-    public int Damage()
+    public float Damage()
     {
         Health target = FindNearestTarget();
 
         if (target == null)
             return 0;
 
-        target.Decrease(_damage);
+        float damage = target.Decrease(_damage);
 
-        return _damage;
+        return damage;
     }
 
     private Health FindNearestTarget()
