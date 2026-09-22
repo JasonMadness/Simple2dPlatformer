@@ -1,11 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(InputHandler))]
 [RequireComponent(typeof(VampirismDamager))]
-[RequireComponent(typeof(VampirismView))]
-[RequireComponent(typeof(VampirismBar))]
 public class Vampirism : MonoBehaviour
 {
     [SerializeField] private float _duration = 6f;
@@ -15,38 +14,28 @@ public class Vampirism : MonoBehaviour
     private Health _health;
     private InputHandler _inputHandler;
     private VampirismDamager _damager;
-    private VampirismView _view;
-    private VampirismBar _vampirismBar;
 
     private bool _isReady = true;
+
+    public event Action<float> ChargeChanged;
+    public event Action Activated;
+    public event Action Deactivated;
+
+    public float Radius => _damager.Radius;
 
     private void Awake()
     {
         _health = GetComponent<Health>();
         _inputHandler = GetComponent<InputHandler>();
         _damager = GetComponent<VampirismDamager>();
-        _view = GetComponent<VampirismView>();
-        _vampirismBar = GetComponent<VampirismBar>();
-
-        _view.SetRadius(_damager.Radius);
-        _view.Hide();
-
-        _vampirismBar.Initialize(1f, 1f);
     }
 
-    private void OnEnable()
-    {
-        _inputHandler.VampirismPressed += OnVampirismPressed;
-    }
+    private void OnEnable() => _inputHandler.VampirismButtonPressed += OnVampirismButtonPressed;
+    private void OnDisable() => _inputHandler.VampirismButtonPressed -= OnVampirismButtonPressed;
 
-    private void OnDisable()
+    private void OnVampirismButtonPressed()
     {
-        _inputHandler.VampirismPressed -= OnVampirismPressed;
-    }
-
-    private void OnVampirismPressed()
-    {
-        if (!_isReady)
+        if (_isReady == false) 
             return;
 
         _isReady = false;
@@ -55,33 +44,30 @@ public class Vampirism : MonoBehaviour
 
     private IEnumerator Drain()
     {
-        _view.Show();
+        Activated?.Invoke();
 
-        float remaining = _duration;
-        float elapsed = 0f;
+        float remainingTime = _duration;
+        float elapsedTime = 0f;
 
-        while (remaining > 0f)
+        while (remainingTime > 0f)
         {
-            elapsed += Time.deltaTime;
+            elapsedTime += Time.deltaTime;
 
-            if (elapsed >= _damageInterval)
+            if (elapsedTime >= _damageInterval)
             {
-                elapsed -= _damageInterval;
-
+                elapsedTime -= _damageInterval;
                 float damage = _damager.Damage();
 
-                if (damage > 0)
+                if (damage > 0) 
                     _health.Increase(damage);
             }
 
-            remaining -= Time.deltaTime;
-            _vampirismBar.OnValueChanged(remaining / _duration);
-
+            remainingTime -= Time.deltaTime;
+            ChargeChanged?.Invoke(remainingTime / _duration);
             yield return null;
         }
 
-        _view.Hide();
-
+        Deactivated?.Invoke();
         yield return Recharge();
     }
 
@@ -92,12 +78,11 @@ public class Vampirism : MonoBehaviour
         while (remaining > 0f)
         {
             remaining -= Time.deltaTime;
-            _vampirismBar.OnValueChanged(1f - remaining / _cooldown);
-
+            ChargeChanged?.Invoke(1f - remaining / _cooldown);
             yield return null;
         }
 
-        _vampirismBar.OnValueChanged(1f);
+        ChargeChanged?.Invoke(1f);
         _isReady = true;
     }
 }
