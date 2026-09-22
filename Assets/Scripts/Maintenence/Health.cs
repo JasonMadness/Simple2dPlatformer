@@ -21,12 +21,16 @@ public class Health : MonoBehaviour
 
     public void Decrease(int damage)
     {
+        if (_current <= 0)
+            return;
+
         _current -= damage;
 
         if (_current <= 0)
         {
             _current = 0;
             Ended?.Invoke();
+            return;
         }
 
         DamageTaken?.Invoke();
