@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int _max = 100;
+    [SerializeField] private float _max = 100;
 
-    private int _current;
+    private float _current;
 
-    public event Action<int> ValueChanged;
+    public event Action<float> ValueChanged;
     public event Action DamageTaken;
     public event Action Ended;
 
-    public int Current => _current;
-    public int Max => _max;
+    public float Current => _current;
+    public float Max => _max;
 
     private void Awake()
     {
         _current = _max;
     }
 
-    public void Decrease(int damage)
+    public void Decrease(float damage)
     {
         if (_current <= 0)
             return;
@@ -37,7 +37,7 @@ public class Health : MonoBehaviour
         ValueChanged?.Invoke(_current);
     }
 
-    public void Increase(int amount)
+    public void Increase(float amount)
     {
         _current += amount;
 
