@@ -16,7 +16,7 @@ public class SmoothBar : Bar
         if (MaxValue <= 0)
             return;
 
-        _targetValue = (float)CurrentValue / MaxValue;
+        _targetValue = CurrentValue / MaxValue;
 
         if (_smoothUpdateCoroutine != null)
             StopCoroutine(_smoothUpdateCoroutine);
@@ -26,7 +26,7 @@ public class SmoothBar : Bar
 
     private IEnumerator SmoothUpdate()
     {
-        while (Mathf.Abs(_slider.value - _targetValue) > _epsilon)
+        while (Mathf.Approximately(_slider.value - _targetValue, 0) == false)
         {
             _slider.value = Mathf.MoveTowards(_slider.value, _targetValue, _speed * Time.deltaTime);
             yield return null;

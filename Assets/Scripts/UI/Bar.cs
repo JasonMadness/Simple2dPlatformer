@@ -2,23 +2,23 @@ using UnityEngine;
 
 public class Bar : MonoBehaviour
 {
-    protected int CurrentValue { get; private set; }
-    protected int MaxValue { get; private set; }
+    protected float CurrentValue { get; private set; }
+    protected float MaxValue { get; private set; }
 
-    public void Initialize(int currentValue, int maxValue)
+    public void Initialize(float currentValue, float maxValue)
     {
         MaxValue = maxValue;
         SetValue(currentValue);
     }
 
-    public void OnValueChanged(int currentValue)
+    public void OnValueChanged(float currentValue)
     {
         SetValue(currentValue);
     }
 
     protected virtual void UpdateView() { }
 
-    private void SetValue(int currentValue)
+    private void SetValue(float currentValue)
     {
         CurrentValue = currentValue;
         UpdateView();
