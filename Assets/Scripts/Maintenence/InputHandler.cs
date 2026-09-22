@@ -12,7 +12,7 @@ public class InputHandler : MonoBehaviour
 
     public float Horizontal => _horizontal;
     public event Action JumpPressed;
-    public event Action VampirismPressed;
+    public event Action VampirismButtonPressed;
 
     private void Update()
     {
@@ -22,6 +22,6 @@ public class InputHandler : MonoBehaviour
             JumpPressed?.Invoke();
 
         if (Input.GetKeyDown(_vampirismKey))
-            VampirismPressed?.Invoke();
+            VampirismButtonPressed?.Invoke();
     }
 }
