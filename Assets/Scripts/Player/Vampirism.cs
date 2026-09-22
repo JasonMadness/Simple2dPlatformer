@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(InputHandler))]
 [RequireComponent(typeof(VampirismDamager))]
 [RequireComponent(typeof(VampirismView))]
+[RequireComponent(typeof(VampirismBar))]
 public class Vampirism : MonoBehaviour
 {
     [SerializeField] private float _duration = 6f;
@@ -15,6 +16,7 @@ public class Vampirism : MonoBehaviour
     private InputHandler _inputHandler;
     private VampirismDamager _damager;
     private VampirismView _view;
+    private VampirismBar _vampirismBar;
 
     private bool _isReady = true;
 
@@ -24,10 +26,12 @@ public class Vampirism : MonoBehaviour
         _inputHandler = GetComponent<InputHandler>();
         _damager = GetComponent<VampirismDamager>();
         _view = GetComponent<VampirismView>();
+        _vampirismBar = GetComponent<VampirismBar>();
 
         _view.SetRadius(_damager.Radius);
         _view.Hide();
-        _view.SetCharge(1f);
+
+        _vampirismBar.Initialize(1f, 1f);
     }
 
     private void OnEnable()
@@ -71,7 +75,7 @@ public class Vampirism : MonoBehaviour
             }
 
             remaining -= Time.deltaTime;
-            _view.SetCharge(remaining / _duration);
+            _vampirismBar.OnValueChanged(remaining / _duration);
 
             yield return null;
         }
@@ -88,12 +92,12 @@ public class Vampirism : MonoBehaviour
         while (remaining > 0f)
         {
             remaining -= Time.deltaTime;
-            _view.SetCharge(1f - remaining / _cooldown);
+            _vampirismBar.OnValueChanged(1f - remaining / _cooldown);
 
             yield return null;
         }
 
-        _view.SetCharge(1f);
+        _vampirismBar.OnValueChanged(1f);
         _isReady = true;
     }
 }
