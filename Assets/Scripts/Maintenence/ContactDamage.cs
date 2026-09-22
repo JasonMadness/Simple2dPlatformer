@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ContactDamage : MonoBehaviour
 {
-    [SerializeField] private int _damage = 10;
+    [SerializeField] private float _damage = 10;
     [SerializeField] private float _contactRange = 0.8f;
     [SerializeField] private float _damageCooldown = 1f;
 
